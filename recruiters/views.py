@@ -2,6 +2,7 @@ from django.core import paginator
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from datetime import datetime
 
 from .forms import JobForm
 from .models import Job, Applicant

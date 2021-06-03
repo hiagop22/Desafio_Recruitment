@@ -1,5 +1,6 @@
+import datetime
 from django.db import models
-from django.utils.timezone import now
+from django.utils import timezone
 
 from django.conf import settings
 
@@ -44,6 +45,14 @@ class Job(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def created_more_than_limit_days(self):
+        limit_date = (timezone.now() - datetime.timedelta(days=30))
+
+        if self.created_at < limit_date:
+            return True
+        return False
 
     def __str__(self):
         return self.title
