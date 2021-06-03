@@ -11,6 +11,8 @@
 #     add_form = UserCreationForm
 #     model = User
 
+from django.db import models
+from recruiters.models import Job
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import Group
@@ -20,7 +22,7 @@ from .forms import UserChangeForm, UserCreationForm
 from .models import User
 
 
-
+@admin.register(User)
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
@@ -49,8 +51,6 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 
-# Now register the new UserAdmin...
-admin.site.register(User, UserAdmin)
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
-# admin.site.unregister(Group)
+@admin.register(Job)
+class JobAdmin(admin.ModelAdmin):
+    list_display = ('recruiter', 'title', 'compulsory_school')

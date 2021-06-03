@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Lista de vagas criadas{% endblock %}
+
+{% block header %}Vagas Criadas{% endblock %}
+
+{% block content %}
+
+
+{% for job in jobs%}
+
+<div class="card mb-3">
+    <div class="card-body">
+      <a href="#" id="add-link" class="text-dark"><h5 class="card-title"><b>{{job.title}}</b></h5></a>
+      <p class="card-text">
+        <b>Escolaridade mínima:</b> {{job.get_compulsory_school_display}}<br>
+        <b>Faixa salarial:</b> {{job.get_salary_range_display}} <br>
+        <b>Requisitos:</b> {{job.requirements|truncatewords:20}}
+      </p>
+    
+      <a href="#" class="btn btn-primary">Ver candidatos</a>
+      <div class="float-right">
+        <button class="btn btn-success mr-1">Editar</button>
+        <button class="btn btn-danger">Deletar</button>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+        {% if created <= 30%}
+            Criada há 2 dias atrás
+        {% else %}
+            Criado há mais de 30 dias
+        {% endif%}
+    </div>
+  </div>
+  {% endfor %}
+
+
+{% endblock %}

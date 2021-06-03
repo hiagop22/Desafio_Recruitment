@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # 3rd apps
     'crispy_forms',
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -141,4 +142,5 @@ AUTH_USER_MODEL = 'users.User'
 
 
 # Crispy
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATES_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
