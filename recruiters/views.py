@@ -1,5 +1,7 @@
+from django.core import paginator
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 from .forms import JobForm
 from .models import Job
@@ -21,6 +23,10 @@ def new_job(request):
     return render(request, 'recruiters/new_job.html', {'form': form})
 
 def list_jobs(request):
-    jobs = Job.objects.filter(recruiter=request.user).order_by('-created_at')
+    job_list = Job.objects.filter(recruiter=request.user).order_by('-created_at')
 
+    paginator = Paginator(job_list, 3)
+    page_number = request.GET.get('page')
+    jobs = paginator.get_page(page_number)
+    print(type(jobs))
     return render(request, 'recruiters/list_jobs.html', {'jobs': jobs})

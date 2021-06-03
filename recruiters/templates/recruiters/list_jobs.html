@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load django_template_maths %}
 
 {% block title %}Lista de vagas criadas{% endblock %}
 
@@ -36,5 +37,66 @@
   </div>
   {% endfor %}
 
+  <nav aria-label="...">
+    <ul class="pagination justify-content-center">
+      {% if jobs.has_previous%}
+        
+      {% if jobs.number|sub:3 > 0%}
+        <li class="page-item">
+            <a class="page-link" href="?page=1">Primeira</a>    
+        </li>
+    {%endif%}
+        <li class="page-item">
+            <a class="page-link" href="?page={{jobs.previous_page_number}}">Anterior</a>
+      </li>
 
+        {% if jobs.number|sub:2 > 0%}
+          <li class="page-item">
+                <a class="page-link" href="?page={{jobs.number|sub:2}}">{{jobs.number|sub:2}}</a>    
+            </li>
+          {% endif%}
+
+          <li class="page-item">
+                <a class="page-link" href="?page={{jobs.number|sub:1}}">{{jobs.number|sub:1}}</a>    
+            </li>
+
+      {% endif %}
+
+      <li class="page-item active" aria-current="page">
+        <span class="page-link">{{jobs.number}}</span>
+      </li>
+
+      {% if jobs.has_next%}
+
+      <li class="page-item">
+          <a class="page-link" href="?page={{jobs.number|add:1}}">{{jobs.number|add:1}}</a>    
+        </li>
+        
+        {% if jobs.number|add:2 <= jobs.paginator.num_pages%}
+        <li class="page-item">
+            <a class="page-link" href="?page={{jobs.number|add:2}}">{{jobs.number|add:2}}</a>    
+        </li>
+        {% endif%}
+
+      <li class="page-item">
+          <a class="page-link" href="?page={{jobs.next_page_number}}">Próxima</a>
+        </li>
+        {% if jobs.number|add:3 <= jobs.paginator.num_pages%}
+        <li class="page-item">
+            <a class="page-link" href="?page={{jobs.paginator.num_pages}}">Última</a>
+        </li>
+        {% endif %}
+        {% endif %}
+        
+    </ul>
+</nav>
+
+        
+
+        
+
+        <!-- <span class="current">
+            Page {{jobs.number}} de {{jobs.paginator.num_pages}}
+        </span>
+     -->
 {% endblock %}
