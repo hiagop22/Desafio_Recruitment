@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% load static %}
+
+{% load custom_tags %}
+
 {% load django_template_maths %}
 
 {% block title %}Lista de vagas criadas{% endblock %}
@@ -18,10 +21,12 @@
       <p class="card-text">
         <b>Escolaridade mínima:</b> {{job.get_compulsory_school_display}}<br>
         <b>Faixa salarial:</b> {{job.get_salary_range_display}} <br>
-        <b>Requisitos:</b> {{job.requirements|truncatewords:20}}
+        <b>Requisitos:</b> {{job.requirements|truncatewords:20}}  
       </p>
     
-      <a href="#" class="btn btn-primary">Ver candidatos</a>
+      <a href="#" class="btn btn-primary">Candidatos
+        <span class="badge bg-secondary">{% count_applicants job.title %}</span>
+      </a>
       <div class="float-right">
         <button class="btn btn-success mr-1">Editar</button>
         <button class="btn btn-danger">Deletar</button>

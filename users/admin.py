@@ -12,7 +12,7 @@
 #     model = User
 
 from django.db import models
-from recruiters.models import Job
+from recruiters.models import Job, Applicant
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import Group
@@ -54,3 +54,7 @@ class UserAdmin(BaseUserAdmin):
 @admin.register(Job)
 class JobAdmin(admin.ModelAdmin):
     list_display = ('recruiter', 'title', 'compulsory_school')
+
+@admin.register(Applicant)
+class ApplicantAdmin(admin.ModelAdmin):
+    list_display =  ('job', 'applicant')

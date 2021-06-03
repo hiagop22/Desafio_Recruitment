@@ -33,6 +33,7 @@ class Job(models.Model):
     ]
 
     recruiter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
     title = models.CharField(max_length=255, verbose_name='Nome da Vaga', 
                     default='Título')
     salary_range = models.CharField(choices=SALARY_RANGE_CHOICES, max_length=2, 
@@ -40,9 +41,17 @@ class Job(models.Model):
     requirements = models.TextField(verbose_name='Requisitos')
     compulsory_school = models.CharField(choices=COMPULSORY_SCHOOL_CHOICES, max_length=255,
                     verbose_name='Escolaridade Mínima')
-    
+
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
+
+class Applicant(models.Model):
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    applicant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    applicated_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.applicant)
