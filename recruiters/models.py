@@ -32,9 +32,11 @@ class Job(models.Model):
     ]
 
     recruiter = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    salary_range = models.CharField(choices=SALARY_RANGE_CHOICES, max_length=2)
-    requirements = models.TextField()
-    compulsory_school = models.CharField(choices=COMPULSORY_SCHOOL_CHOICES, max_length=255)
+    title = models.CharField(max_length=255, verbose_name='Nome da Vaga')
+    salary_range = models.CharField(choices=SALARY_RANGE_CHOICES, max_length=2, 
+                    verbose_name='Faixa Salarial')
+    requirements = models.TextField(verbose_name='Requisitos')
+    compulsory_school = models.CharField(choices=COMPULSORY_SCHOOL_CHOICES, max_length=255,
+                    verbose_name='Escolaridade Mínima')
 
 
