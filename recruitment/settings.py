@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'candidates.apps.CandidatesConfig',
     'recruiters.apps.RecruitersConfig',
+    'pages.apps.PagesConfig',
 
     # 3rd apps
     'crispy_forms',
@@ -162,3 +163,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 # Login
 SITE_ID = 1
 LOGIN_REDIRECT_URL = "/"
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

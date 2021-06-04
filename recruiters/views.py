@@ -11,7 +11,7 @@ from .models import Job, Applicant
 def home(request):
     return render(request, 'recruiters/home.html')
 
-@login_required(login_url='')
+@login_required()
 def new_job(request):
     if request.method == 'POST':
         form = JobForm(request.POST)
@@ -26,6 +26,7 @@ def new_job(request):
     form = JobForm()
     return render(request, 'recruiters/new_job.html', {'form': form})
 
+@login_required()
 def list_jobs(request):
     job_list = Job.objects.filter(recruiter=request.user).order_by('-created_at')
 
@@ -35,10 +36,12 @@ def list_jobs(request):
     print(type(jobs))
     return render(request, 'recruiters/list_jobs.html', {'jobs': jobs})
 
+@login_required()
 def view_job(request, id):
     job = get_object_or_404(Job, pk=id)
     return render(request, 'recruiters/view_job.html', {'job': job})
 
+@login_required()
 def update_job(request, id):
     job = get_object_or_404(Job, pk=id)
     form = JobForm(instance=job)
@@ -54,6 +57,7 @@ def update_job(request, id):
     else:
         return render(request, 'recruiters/update_job.html', {'form': form})
 
+@login_required()
 def delete_job(request, id):
     job = get_object_or_404(Job, pk=id)
 
