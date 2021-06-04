@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% load custom_tags %}
+
+{% block title %}Detalhes da Vaga{% endblock %}
+
+{% block header %}Detalhes da Vaga{% endblock %}
+
+{% block content %}
+
+<div class="card mb-3">
+    <div class="card-body">
+      <a href="#" id="add-link" class="text-dark"><h5 class="card-title"><b>{{job.title}}</b></h5></a>
+      <p class="card-text">
+        <b>Escolaridade mínima:</b> {{job.get_compulsory_school_display}}<br>
+        <b>Faixa salarial:</b> {{job.get_salary_range_display}} <br>
+        <b>Requisitos:</b> {{job.requirements}}  
+      </p>
+    
+      <a href="#" class="btn btn-primary">Candidatos
+        <span class="badge bg-secondary">{% count_applicants job.title %}</span>
+      </a>
+      {% include 'recruiters/buttons.html' %}
+    </div>
+    <div class="card-footer text-muted">
+        {% if not job.created_more_than_limit_days %}
+            Criado há {{job.created_at|naturaltime}}
+        {% else %}
+            Criado há mais de 30 dias
+        {% endif%}
+    </div>
+  </div>
+
+
+{% endblock %}

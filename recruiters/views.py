@@ -31,3 +31,28 @@ def list_jobs(request):
     jobs = paginator.get_page(page_number)
     print(type(jobs))
     return render(request, 'recruiters/list_jobs.html', {'jobs': jobs})
+
+def view_job(request, id):
+    job = get_object_or_404(Job, pk=id)
+    return render(request, 'recruiters/view_job.html', {'job': job})
+
+def update_job(request, id):
+    job = get_object_or_404(Job, pk=id)
+    form = JobForm(instance=job)
+
+    if(request.method == 'POST'):
+        job = JobForm(request.POST, instance=job)
+
+        if(job.is_valid()):
+            job.save()
+            return redirect('/recruiters/list_jobs/')
+        else:
+            return render(request, 'recruiters/update_job.html', {'form': form})
+    else:
+        return render(request, 'recruiters/update_job.html', {'form': form})
+
+def delete_job(request, id):
+    job = get_object_or_404(Job, pk=id)
+
+    job.delete()
+    return redirect('/recruiters/list_jobs/')
