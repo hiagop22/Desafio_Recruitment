@@ -1,6 +1,8 @@
 import datetime
 from django.db import models
 from django.utils import timezone
+from autoslug import AutoSlugField
+from django.urls import reverse
 
 from django.conf import settings
 
@@ -46,6 +48,8 @@ class Job(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    slug = AutoSlugField(unique=True, always_update=False, populate_from='title')
+
     @property
     def created_more_than_limit_days(self):
         limit_date = (timezone.now() - datetime.timedelta(days=30))
@@ -53,6 +57,9 @@ class Job(models.Model):
         if self.created_at < limit_date:
             return True
         return False
+    
+    # def get_absolute_url(self):
+    #     return reverse()
 
     def __str__(self):
         return self.title
