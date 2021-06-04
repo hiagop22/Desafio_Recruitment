@@ -1,0 +1,6 @@
+crispy-bootstrap5==0.4
+Django==3.2.3
+django-allauth==0.44.0
+django-crispy==1.8.1
+django-crispy-forms==1.11.2
+django-template-maths==0.2.0
