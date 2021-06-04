@@ -1,4 +1,4 @@
 <div class="float-right">
-    <a href="{% url 'recruiters:update_job' job.id %}"><button class="btn btn-success mr-1">Editar</button></a>
-    <a href="{% url 'recruiters:delete_job' job.id %}" class="delete-btn"><button class="btn btn-danger">Deletar</button></a>
+    <a href="{{job.get_absolute_url}}update_job"><button class="btn btn-success mr-1">Editar</button></a>
+    <a href="{{job.get_absolute_url}}delete_job" class="delete-btn"><button class="btn btn-danger">Deletar</button></a>
 </div>

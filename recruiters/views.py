@@ -21,7 +21,7 @@ def new_job(request):
             job.recruiter = request.user
             job.save()
 
-            return redirect('/recruiters/list_jobs/')
+            return redirect('recruiters:list_jobs')
 
     form = JobForm()
     return render(request, 'recruiters/new_job.html', {'form': form})
@@ -33,17 +33,16 @@ def list_jobs(request):
     paginator = Paginator(job_list, 6)
     page_number = request.GET.get('page')
     jobs = paginator.get_page(page_number)
-    print(type(jobs))
     return render(request, 'recruiters/list_jobs.html', {'jobs': jobs})
 
 @login_required()
-def view_job(request, id):
-    job = get_object_or_404(Job, pk=id)
+def view_job(request, slug):
+    job = get_object_or_404(Job, slug=slug)
     return render(request, 'recruiters/view_job.html', {'job': job})
 
 @login_required()
-def update_job(request, id):
-    job = get_object_or_404(Job, pk=id)
+def update_job(request, slug):
+    job = get_object_or_404(Job, slug=slug)
     form = JobForm(instance=job)
 
     if(request.method == 'POST'):
@@ -51,15 +50,15 @@ def update_job(request, id):
 
         if(job.is_valid()):
             job.save()
-            return redirect('/recruiters/list_jobs/')
+            return redirect('recruiters:list_jobs')
         else:
             return render(request, 'recruiters/update_job.html', {'form': form})
     else:
         return render(request, 'recruiters/update_job.html', {'form': form})
 
 @login_required()
-def delete_job(request, id):
-    job = get_object_or_404(Job, pk=id)
+def delete_job(request, slug):
+    job = get_object_or_404(Job, slug=slug)
 
     job.delete()
-    return redirect('/recruiters/list_jobs/')
+    return redirect('recruiters:list_jobs')

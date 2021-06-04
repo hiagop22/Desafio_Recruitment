@@ -18,7 +18,7 @@
 
 <div class="card mb-3">
     <div class="card-body">
-      <a href="{% url 'recruiters:view_job' job.id %}" id="add-link" class="text-dark"><h5 class="card-title"><b>{{job.title}}</b></h5></a>
+      <a href="{{ job.get_absolute_url }}" id="add-link" class="text-dark"><h5 class="card-title"><b>{{job.title}}</b></h5></a>
       <p class="card-text">
         <b>Escolaridade mínima:</b> {{job.get_compulsory_school_display}}<br>
         <b>Faixa salarial:</b> {{job.get_salary_range_display}} <br>
@@ -32,7 +32,7 @@
     </div>
     <div class="card-footer text-muted">
         {% if not job.created_more_than_limit_days %}
-            Criado há {{job.created_at|naturaltime}}
+            Criado há {% remove_hour_if_there_is_day job.created_at|naturaltime %}
         {% else %}
             Criado há mais de 30 dias
         {% endif%}

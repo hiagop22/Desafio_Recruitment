@@ -58,8 +58,8 @@ class Job(models.Model):
             return True
         return False
     
-    # def get_absolute_url(self):
-    #     return reverse()
+    def get_absolute_url(self):
+        return reverse('recruiter:detail_job', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.title
@@ -69,5 +69,10 @@ class Applicant(models.Model):
     applicant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     applicated_date = models.DateTimeField(auto_now_add=True)
 
+    slug = AutoSlugField(unique=True, always_update=False, populate_from='job')
+
     def __str__(self):
         return str(self.applicant)
+
+    def get_absolute_url(self):
+        return reverse('recruiter:candidates', kwargs={'slug': self.slug})
