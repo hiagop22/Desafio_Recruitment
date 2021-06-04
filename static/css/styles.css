@@ -26,6 +26,11 @@ justify-content: space-between;
     padding-top: 0%!important;
 }
 
+.px-5{
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
 /* link */
 #add-link{
     text-decoration: none;

@@ -7,18 +7,21 @@ from datetime import datetime
 from .forms import JobForm
 from .models import Job, Applicant
 
-# @login_required
+@login_required
 def home(request):
     return render(request, 'recruiters/home.html')
 
-# @login_required(login_url='')
+@login_required(login_url='')
 def new_job(request):
     if request.method == 'POST':
         form = JobForm(request.POST)
 
         if form.is_valid():
-            job = form.save()
-            return redirect('new_job/')
+            job = form.save(commit=False)
+            job.recruiter = request.user
+            job.save()
+
+            return redirect('/recruiters/list_jobs/')
 
     form = JobForm()
     return render(request, 'recruiters/new_job.html', {'form': form})
@@ -26,7 +29,7 @@ def new_job(request):
 def list_jobs(request):
     job_list = Job.objects.filter(recruiter=request.user).order_by('-created_at')
 
-    paginator = Paginator(job_list, 3)
+    paginator = Paginator(job_list, 6)
     page_number = request.GET.get('page')
     jobs = paginator.get_page(page_number)
     print(type(jobs))
