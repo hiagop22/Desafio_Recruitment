@@ -9,8 +9,20 @@ def count_applicants(job_title):
     return str(applicants_number)
 
 @register.simple_tag
-def remove_hour_if_there_is_day(date):
-    splited_time = str(date).split(',')
-    if len(splited_time) == 2:
-        return f'{splited_time[0]} atrás'
-    return splited_time[0]
+def insert_spaces_into_string(date):
+    if 'semanas' in str(date):
+
+        splited_time = str(date).split(',')
+        if len(splited_time) == 2:
+            num_in_date = [num for num in date if num.isdigit()]
+            if num_in_date[0] == '1':
+                week = 'semana'
+            else:
+                week = 'semanas'
+            if num_in_date[1] == '1':
+                day = 'dia'
+            else:
+                day = 'dias'
+            date = f'{num_in_date[0]} {week}, {num_in_date[1]} {day} atrás'
+
+    return date
