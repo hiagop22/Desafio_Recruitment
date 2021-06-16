@@ -3,5 +3,7 @@ Django==3.2.3
 django-allauth==0.44.0
 django-crispy==1.8.1
 django-crispy-forms==1.11.2
+crispy-bootstrap5==0.1.1.1
 django-template-maths==0.2.0
 django-autoslug==1.9.8
+setuptools-rust==0.12.1

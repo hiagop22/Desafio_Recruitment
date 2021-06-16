@@ -1,7 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content%} 
+<!-- CharJS -->
 <div class="container">
-    Chart js
+    <canvas class="line-chart"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    
+    <script>
+        var ctx = document.getElementsByClassName('line-chart');
+
+        var chartGraph = new Chart(ctx, {
+            type:'line',
+            data: {
+                labels: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul'],
+                datasets: [{
+                        label: 'taxa de cliques - 2017',
+                        data: [5, 10, 5, 20, 6, 30, 27],
+                        borderWidth: 6,
+                        borderColor: 'rgba(77,166,253,0.85)', 
+                        backgroundColor: 'transparent',
+                    },
+                    {
+                        label: 'taxa de cliques - 2018',
+                        data: [9, 14, 20, 25, 12, 15, 20],
+                        borderWidth: 6,
+                        borderColor: 'rgba(6,204,6,0.85)',
+                        backgroundColor: 'transparent',
+                    }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    fontSize: 20,
+                    text: 'Relatório de cliques Anual'
+                },
+                labels: {
+                    fontStyle: 'bold',
+                },
+                scales:{
+                    y : {
+                        beginAtZero: true,
+                    }
+                },
+            }
+        });
+
+
+
+    </script>
+    
 </div>
+
 {% endblock%}

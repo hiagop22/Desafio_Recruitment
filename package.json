@@ -1,0 +1,20 @@
+{
+  "name": "recruitment-system",
+  "description": "A system wich manager jobs created by recruiters and applying from candidates",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "Hiago dos Santos <hiagop22@gmail.com>",
+  "contributors": [],
+  "dependencies": [],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/documentcloud/underscore.git"
+  },
+  "main": "underscore.js",
+  "version": "1.0.0"
+}
