@@ -3,26 +3,27 @@
 {% block content%} 
 <!-- CharJS -->
 <div class="container">
-    <canvas class="line-chart"></canvas>
+    <canvas class="line-chart1 mb-3"></canvas>
+    <canvas class="line-chart2 mb-3"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     
     <script>
-        var ctx = document.getElementsByClassName('line-chart');
+        var ctx = document.getElementsByClassName('line-chart1');
 
         var chartGraph = new Chart(ctx, {
             type:'line',
             data: {
-                labels: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul'],
+                labels: ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'],
                 datasets: [{
-                        label: 'taxa de cliques - 2017',
-                        data: [5, 10, 5, 20, 6, 30, 27],
+                        label: 'Vagas criadas por mês - 2021',
+                        data: [5,10,5,20,6,30,27,25,30,25,12,50],
                         borderWidth: 6,
                         borderColor: 'rgba(77,166,253,0.85)', 
                         backgroundColor: 'transparent',
                     },
                     {
-                        label: 'taxa de cliques - 2018',
-                        data: [9, 14, 20, 25, 12, 15, 20],
+                        label: 'Vagas criadas por mês - 2020',
+                        data: [85],
                         borderWidth: 6,
                         borderColor: 'rgba(6,204,6,0.85)',
                         backgroundColor: 'transparent',
@@ -33,7 +34,7 @@
                 title: {
                     display: true,
                     fontSize: 20,
-                    text: 'Relatório de cliques Anual'
+                    text: 'Relatório de Vagas Anual'
                 },
                 labels: {
                     fontStyle: 'bold',
@@ -46,9 +47,50 @@
             }
         });
 
+        
 
+        var ctx2 = document.getElementsByClassName('line-chart2');
+
+        var chartGraph = new Chart(ctx2, {
+            type:'line',
+            data: {
+                labels: ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'],
+                datasets: [{
+                        label: 'Vagas criadas por mês - 2021',
+                        data: [5,10,5,20,6,30,27,25,30,25,12,50],
+                        borderWidth: 6,
+                        borderColor: 'rgba(77,166,253,0.85)', 
+                        backgroundColor: 'transparent',
+                    },
+                    {
+                        label: 'Vagas criadas por mês - 2020',
+                        data: [85],
+                        borderWidth: 6,
+                        borderColor: 'rgba(6,204,6,0.85)',
+                        backgroundColor: 'transparent',
+                    }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    fontSize: 20,
+                    text: 'Relatório de Vagas Anual'
+                },
+                labels: {
+                    fontStyle: 'bold',
+                },
+                scales:{
+                    y : {
+                        beginAtZero: true,
+                    }
+                },
+            }
+        });
 
     </script>
+
+    
     
 </div>
 

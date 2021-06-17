@@ -1,7 +1,10 @@
 from django.core import paginator
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from recruiters.models import Job
 from django.core.paginator import Paginator
+
+def home(request):
+    return redirect('candidates:list_jobs')
 
 def list_jobs(request):
     job_list = Job.objects.filter().order_by('created_at')

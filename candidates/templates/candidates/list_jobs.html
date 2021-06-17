@@ -32,7 +32,7 @@
     </div>
     <div class="card-footer text-muted">
         {% if not job.created_more_than_limit_days %}
-            Criado há {% remove_hour_if_there_is_day job.created_at|naturaltime %}
+            Criado há {% insert_spaces_into_string job.created_at|naturaltime %}
         {% else %}
             Criado há mais de 30 dias
         {% endif%}
